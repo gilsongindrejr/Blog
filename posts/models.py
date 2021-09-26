@@ -1,6 +1,12 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.shortcuts import reverse
+
+
+class PostManager(models.Manager):
+    def get_queryset(self):
+        return super(PostManager, self).get_queryset().filter(status='published')
 
 
 class Post(models.Model):
@@ -12,15 +18,20 @@ class Post(models.Model):
     title = models.CharField(max_length=250)
     body = models.TextField()
     author = models.ForeignKey(get_user_model(), related_name='posts', on_delete=models.CASCADE)
-    slug = models.SlugField(unique_for_date='published', max_length=250)
+    slug = models.SlugField(unique_for_date='publish', max_length=250)
     status = models.CharField(choices=STATUS_CHOICES, max_length=10, default='draft')
-    published = models.DateTimeField(default=timezone.now)
+    publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    is_active = models.BooleanField(default=True)
+
+    objects = models.Manager()
+    published = PostManager()
+
+    def get_absolute_url(self):
+        return reverse('blog:detail', args=[self.publish.year, self.publish.month, self.publish.day, self.slug])
 
     def __str__(self):
         return self.title
 
     class Meta:
-        ordering = ('-published',)
+        ordering = ('-publish',)

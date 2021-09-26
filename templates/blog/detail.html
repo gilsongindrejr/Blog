@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ post.title }}</h1>
+    <h5>{{ post.author }}</h5>
+    <div class="container m-5">
+        <p>{{ post.body }}</p>
+    </div>
+    <a href="{% url 'blog:index' %}">back</a>
+    <p>{{ post.publish }}</p>
+</div>
+{% endblock %}
