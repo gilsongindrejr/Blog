@@ -1,16 +1,46 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 
 {% block title %}{% endblock %}
 
 {% block content %}
 <div class="container bg-light">
-    <h1>{{ post.title }}</h1>
-    <h5>{{ post.author }}</h5>
+
+    <!-- Post -->
+    <h1 class="ml-3">{{ post.title }}</h1>
+    <h5 class="ml-3">{{ post.author }}</h5>
     <div class="container m-5">
         <p>{{ post.body }}</p>
     </div>
-    <a href="{% url 'blog:index' %}" class="btn btn-primary">back</a>
+    <a href="{% url 'blog:index' %}" class="btn btn-primary ml-3">back</a>
     <a href="{% url 'blog:share' post.id %}" class="btn btn-primary">Share</a>
-    <p>{{ post.publish }}</p>
+    <p class="mt-2 ml-3">{{ post.publish }}</p>
+
+    <!-- Comment form -->
+    <div class="container">
+        <h3 class="mt-5">Post a new comment</h3>
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form comment_form %}
+            <input type="submit" class="btn btn-primary mb-5" value="Comment">
+        </form>
+    </div>
+
+    <!-- Comments -->
+    <div class="container">
+        {% with comments.count as comments_total %}
+        <h5>There are {{ comments_total }} comment{{ comments_total|pluralize }}</h5>
+        {% endwith %}
+    </div>
+    <div class="container mt-4">
+        {% for comment in comments%}
+            <div class="container pb-4">
+                <h5>Comment {{ forloop.counter }} by {{ comment.name }}</h5>
+                <p>{{ comment.body }}</p>
+            </div>
+        {% empty %}
+            <h5>There are no comments yet.</h5>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
