@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.shortcuts import reverse
 
+from taggit.managers import TaggableManager
+
 
 class PostManager(models.Manager):
     def get_queryset(self):
@@ -26,6 +28,7 @@ class Post(models.Model):
 
     objects = models.Manager()
     published = PostManager()
+    tags = TaggableManager()
 
     def get_absolute_url(self):
         return reverse('blog:detail', args=[self.publish.year, self.publish.month, self.publish.day, self.slug])

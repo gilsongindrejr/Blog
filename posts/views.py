@@ -1,16 +1,32 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from django.core.mail import send_mail
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Count
+
+from taggit.models import Tag
 
 from .models import Post
 from .forms import ShareForm, CommentModelForm
 
 
-class PostListView(ListView):
-    queryset = Post.published.all()
-    paginate_by = 3
-    template_name = 'blog/index.html'
-    context_object_name = 'posts'
+def post_list(request, tag_slug=None):
+    objects = Post.published.all()
+    tag = None
+
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        objects = objects.filter(tags__in=[tag])
+
+    paginator = Paginator(objects, 3)
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    return render(request, 'blog/index.html', {'page': page, 'posts': posts, 'tag': tag})
 
 
 def post_detail(request, year, month, day, slug):
@@ -33,6 +49,9 @@ def post_detail(request, year, month, day, slug):
             comment_form = CommentModelForm()
     else:
         comment_form = CommentModelForm()
+    post_tags_ids = post.tags.values_list('id', flat=True)
+    similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
+    similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-publish')[:4]
     return render(
         request,
         'blog/detail.html',
@@ -40,7 +59,8 @@ def post_detail(request, year, month, day, slug):
             'post': post,
             'comments': comments,
             'new_comment': new_comment,
-            'comment_form': comment_form
+            'comment_form': comment_form,
+            'similar_posts': similar_posts,
         }
     )
 
