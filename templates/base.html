@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
     {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
 </head>
-<body>
+<body class="bg-dark">
 {% block content %}{% endblock %}
 </body>
 </html>

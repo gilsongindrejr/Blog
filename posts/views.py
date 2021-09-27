@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
+from django.core.mail import send_mail
 
 from .models import Post
+from .forms import ShareForm
 
 
 class PostListView(ListView):
@@ -21,3 +23,26 @@ def post_detail(request, year, month, day, slug):
         slug=slug
     )
     return render(request, 'blog/detail.html', {'post': post})
+
+
+def post_share(request, post_id):
+    post = get_object_or_404(Post, id=post_id, status='published')
+    shared = False
+
+    if request.method == 'POST':
+        form = ShareForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            post_url = request.build_absolute_uri(post.get_absolute_url())
+            subject = f"{cd['name']} recommends you read {post.title}"
+            message = f"Read {post.title} at {post_url}\n\n{cd['name']}\'s comments: {cd['comments']}"
+            send_mail(
+                subject=subject,
+                message=message,
+                from_email='junior.gindre@gmail.com',
+                recipient_list=[cd['to']]
+            )
+            shared = True
+    else:
+        form = ShareForm()
+    return render(request, 'blog/share.html', {'form': form, 'post': post, 'shared': shared})
