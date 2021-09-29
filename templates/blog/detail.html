@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load bootstrap4 %}
 
 {% block title %}{% endblock %}
@@ -24,23 +25,23 @@
         <div class="container m-5">
             <p>{{ post.body }}</p>
         </div>
-        <a href="{% url 'blog:share' post.id %}" class="btn btn-primary ml-3">Share</a>
+        <a href="{% url 'blog:share' post.id %}" class="btn btn-primary ml-3">{% translate "Share" %}</a>
         <p class="mt-2 ml-3">{{ post.publish }}</p>
     </div>
 
     <!-- Post recomendation -->
     <div class="container">
-        <h2>Similar posts</h2>
+        <h2>{% translate "Similar posts" %}</h2>
         {% for post in similar_posts %}
             <p><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></p>
         {% empty %}
-            There are no similar posts
+            {% translate "There are no similar posts" %}
         {% endfor %}
     </div>
 
     <!-- Comment form -->
     <div class="container">
-        <h3 class="mt-5">Post a new comment</h3>
+        <h3 class="mt-5">{% translate "Post a new comment" %}</h3>
         <form method="post">
             {% csrf_token %}
             {% bootstrap_form comment_form %}
@@ -51,17 +52,17 @@
     <!-- Comments -->
     <div class="container">
         {% with comments.count as comments_total %}
-        <h5>There are {{ comments_total }} comment{{ comments_total|pluralize }}</h5>
+        <h5>{% translate "There are" %} {{ comments_total }} {% translate "comment" %} {{ comments_total|pluralize }}</h5>
         {% endwith %}
     </div>
     <div class="container mt-4">
         {% for comment in comments%}
             <div class="container pb-4 border shadow mb-4">
-                <h5 class="pt-2">Comment {{ forloop.counter }} by {{ comment.name }}</h5>
+                <h5 class="pt-2">{% translate "Comment" %} {{ forloop.counter }} {% translate "by" %} {{ comment.name }}</h5>
                 <p>{{ comment.body }}</p>
             </div>
         {% empty %}
-            <h5 class="pb-4">There are no comments yet.</h5>
+            <h5 class="pb-4">{% translate "There are no comments yet." %}</h5>
         {% endfor %}
     </div>
 </div>

@@ -1,0 +1,155 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-29 12:38-0300\n"
+"PO-Revision-Date: 2021-09-29 13:03-0300\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.4.2\n"
+
+#: posts/forms.py:8
+msgid "Name"
+msgstr "Nombre"
+
+#: posts/forms.py:10
+msgid "To"
+msgstr "Para"
+
+#: posts/forms.py:11
+msgid "Comments"
+msgstr "Comentarios"
+
+#: posts/models.py:17
+msgid "Draft"
+msgstr "Borrador"
+
+#: posts/models.py:18
+msgid "Published"
+msgstr "Publicado"
+
+#: posts/models.py:21
+msgid "title"
+msgstr "título"
+
+#: posts/models.py:23
+msgid "author"
+msgstr "autor"
+
+#: posts/models.py:25
+msgid "status"
+msgstr "estado"
+
+#: posts/models.py:26
+msgid "publish"
+msgstr "publicar"
+
+#: posts/models.py:27 posts/models.py:48
+msgid "created"
+msgstr "creado"
+
+#: posts/models.py:28 posts/models.py:49
+msgid "modified"
+msgstr "modificado"
+
+#: posts/models.py:46
+msgid "name"
+msgstr "nombre"
+
+#: posts/models.py:47
+msgid "body"
+msgstr "cuerpo"
+
+#: posts/models.py:50
+msgid "active"
+msgstr "activo"
+
+#: templates/blog/detail.html:28
+msgid "Share"
+msgstr "Cuota"
+
+#: templates/blog/detail.html:34
+msgid "Similar posts"
+msgstr "Publicaciones similares"
+
+#: templates/blog/detail.html:38
+msgid "There are no similar posts"
+msgstr "No hay publicaciones similares"
+
+#: templates/blog/detail.html:44
+msgid "Post a new comment"
+msgstr "Publica un comentario nuevo"
+
+#: templates/blog/detail.html:55
+msgid "There are"
+msgstr "Existen"
+
+#: templates/blog/detail.html:55
+msgid "comment"
+msgstr "comentario"
+
+#: templates/blog/detail.html:61
+msgid "Comment"
+msgstr "Comentario"
+
+#: templates/blog/detail.html:61
+msgid "by"
+msgstr "por"
+
+#: templates/blog/detail.html:65
+msgid "There are no comments yet."
+msgstr "Todavía no hay comentarios."
+
+#: templates/blog/index.html:38
+msgid "This is my blog"
+msgstr "Este es mi blog"
+
+#: templates/blog/index.html:39
+msgid "I've written"
+msgstr "He escrito"
+
+#: templates/blog/index.html:39
+msgid "posts so far"
+msgstr "publicaciones hasta ahora"
+
+#: templates/blog/index.html:40
+msgid "Latest Posts"
+msgstr "últimas publicaciones"
+
+#: templates/blog/index.html:42
+msgid "Most Commented Posts"
+msgstr "Publicaciones más comentadas"
+
+#: templates/blog/share.html:10
+msgid "Mail sent successfully!"
+msgstr "¡El correo enviado con éxito!"
+
+#: templates/blog/share.html:11 templates/blog/share.html:16
+msgid "Back"
+msgstr "atrás"
+
+#: templates/pagination.html:5
+msgid "Previous"
+msgstr "Previa"
+
+#: templates/pagination.html:8
+msgid "Page"
+msgstr "Página"
+
+#: templates/pagination.html:8
+msgid "of"
+msgstr "de"
+
+#: templates/pagination.html:11
+msgid "Next"
+msgstr "Próxima"

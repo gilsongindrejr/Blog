@@ -1,13 +1,14 @@
+{% load i18n %}
 <div>
   <span>
     {% if page.has_previous %}
-      <a href="?page={{ page.previous_page_number }}">Previous</a>
+      <a href="?page={{ page.previous_page_number }}">{% translate "Previous" %}</a>
     {% endif %}
     <span>
-      Page {{ page.number }} of {{ page.paginator.num_pages }}
+      {% translate "Page" %} {{ page.number }} {% translate "of" %} {{ page.paginator.num_pages }}
     </span>
     {% if page.has_next %}
-      <a href="?page={{ page.next_page_number }}">Next</a>
+      <a href="?page={{ page.next_page_number }}">{% translate "Next" %}</a>
     {% endif %}
   </span>
 </div>

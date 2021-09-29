@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load blog_tags %}
+{% load i18n %}
 
 {% block title %}{% endblock %}
 
@@ -34,11 +35,11 @@
             </div>
         <div class="col-lg-3 mt-3">
             <div class="container border shadow mt-5 p-3">
-                <h3>This is my blog</h3>
-                <p>I've written {% total_posts %} posts so far</p>
-                <h5>Latest Posts</h5>
+                <h3>{% translate "This is my blog" %}</h3>
+                <p>{% translate "I've written" %} {% total_posts %} {% translate "posts so far" %}</p>
+                <h5>{% translate "Latest Posts" %}</h5>
                 {% show_latest_posts %}
-                <h5>Most Commented Posts</h5>
+                <h5>{% translate "Most Commented Posts" %}</h5>
                 {% get_most_commented_posts as most_commented_posts %}
                 <ul>
                     {% for post in most_commented_posts %}

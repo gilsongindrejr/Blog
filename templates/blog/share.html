@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load i18n %}
 
 {% block title %}{% endblock %}
 
 {% block content %}
 <div class="container bg-light py-3">
 {% if shared %}
-        <h5>Mail sent successfully!</h5>
-    <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Back</a>
+        <h5>{% translate "Mail sent successfully!" %}</h5>
+    <a href="{{ post.get_absolute_url }}" class="btn btn-primary">{% translate "Back" %}</a>
 {% else %}
     <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Back</a>
+        <a href="{{ post.get_absolute_url }}" class="btn btn-primary">{% translate "Back" %}</a>
         <input type="submit" class="btn btn-primary" value="Send">
     </form>
 {% endif %}
