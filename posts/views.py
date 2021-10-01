@@ -11,7 +11,7 @@ from .models import Post
 from .forms import ShareForm, CommentModelForm
 
 
-def post_list(request, tag_slug=None):
+def post_list(request, tag_slug=None, page=None):
     context = {}
     objects = Post.published.all()
     tag = None
@@ -24,7 +24,9 @@ def post_list(request, tag_slug=None):
         objects = objects.filter(tags__in=[tag])
 
     paginator = Paginator(objects, 3)
-    page = request.GET.get('page')
+
+    if not page:
+        page = request.GET.get('page')
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
