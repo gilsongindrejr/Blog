@@ -1,6 +1,18 @@
 version: "3.8"
 
 services:
+  db:
+    image: postgres:14
+    volumes:
+      - data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=blog_app
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    networks:
+      - nw_pyblog
+    container_name: blogpy_db
+
   blog:
     build:
       dockerfile: Dockerfile
@@ -13,11 +25,14 @@ services:
     networks:
       - nw_pyblog
     volumes:
-      - data:/var/www
+      - app:/var/www/
+    depends_on:
+      - db
 
 networks:
   nw_pyblog:
     driver: bridge
 
 volumes:
+  app:
   data:
