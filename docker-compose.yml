@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  blog:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: gilsonjr/blogpy:1.0
+    container_name: blogpy
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 80:8000
+    networks:
+      - nw_pyblog
+    volumes:
+      - data:/var/www
+
+networks:
+  nw_pyblog:
+    driver: bridge
+
+volumes:
+  data:
