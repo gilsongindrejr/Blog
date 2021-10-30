@@ -14,28 +14,22 @@ $ git clone <https://github.com/gilsongindrejr/Blog.git>
 ```
 $ cd Blog
 ```
-
-#### Activate the virtual enviroment
+#### Build the container
 ```
-$ source venv/bin/activate
-```
-
-#### Install requirements
-```
-$ pip install -r requirements.txt
+$ docker-compose up --build -d
 ```
 
 #### Migrate the database
 ```
-$ python manage.py migrate
+$ docker-compose exec blog python manage.py migrate
 ```
 
-#### Run server
+#### Create super user
 ```
-$ python manage.py runserver
+$ docker-compose exec blog python manage.py createsuperuser
 ```
 
-#### The server will be initiated on port 8000 - access <http://127.0.0.1:8000> 
+##### The server will be initiated on port 80 - access <http://127.0.0.1> 
 
 # Testing
 
@@ -44,7 +38,7 @@ The tests was made using pytest.
 
 #### Run tests and show coverage
 ```
-$ pytest --cov
+$ docker-compose exec blog pytest --cov
 ```
 
 #### Run tests and create coverage html page
