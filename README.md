@@ -1,7 +1,7 @@
 # Blogpy
 
 Blog app made with django 3 following the awesome book Django 3 by Example from Antonio Melé.
-The app is translated to pt_BR and es using po files.
+The app is translated to pt_BR and es using po files. The app works in two containers, one for the django app and another for the postgres database
 
 # Running backend server
 
